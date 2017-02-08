@@ -1,0 +1,96 @@
+@import '../../core/variables';
+@import '../../core/motion';
+@import '../../core/elevation';
+
+.pmd-textfield {
+    position: relative;
+    display: block;
+    height: 72px;
+
+    &__label {
+        display: block;
+        font-size: 16px;
+        color: rgba(0, 0, 0, .38);
+
+        position: absolute;
+        top: 36px;
+        left: 0;
+        right: 0;
+        pointer-events: none;
+
+        transform: translateY(0) scale(1);
+        transform-origin: left;
+        transition: transform $pmd-motion--ease-in-out 0.2s,
+            color $pmd-motion--ease-in-out 0.2s;
+
+        &--floating {
+            transform: translateY(-22px) scale(0.75);
+        }
+    }
+
+    &__input {
+        display: block;
+        background: transparent;
+        border: 0;
+        font-size: 16px;
+        width: 100%;
+        color: rgba(0, 0, 0, .87);
+
+        position: relative;
+        top: 38px;
+
+        &:focus {
+            outline: 0;
+        }
+    }
+
+    &__underline {
+        display: block;
+        position: absolute;
+        top: 63px;
+        left: 0;
+        right: 0;
+        border-bottom: 1px solid rgba(0, 0, 0, .15);
+
+        &::after {
+            content: '';
+            display: block;
+            position: relative;
+            top: 2px;
+            height: 2px;
+            background: $pmd-color-primary;
+            opacity: 0;
+            transition: opacity $pmd-motion--ease-in-out 0.2s;
+        }
+    }
+
+    &:hover {
+        .pmd-textfield__label {
+            color: rgba(0, 0, 0, .54);
+        }
+    }
+
+    &--focused {
+        .pmd-textfield__label {
+            color: $pmd-color-primary !important;
+        }
+
+        .pmd-textfield__underline {
+            &::after {
+                opacity: 1;
+            }
+        }
+    }
+
+    &--disabled {
+        pointer-events: none;
+
+        .pmd-textfield__input {
+            color: rgba(0, 0, 0, .38);
+        }
+
+        .pmd-textfield__underline {
+            border-bottom-style: dashed;
+        }
+    }
+}
