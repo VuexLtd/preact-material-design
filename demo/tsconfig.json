@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "module": "es2015",
+        "moduleResolution": "node",
+        "target": "es5",
+        "noImplicitAny": false,
+        "sourceMap": true,
+        "outDir": "dist",
+        "declaration": true,
+        "jsx": "react",
+        "jsxFactory": "h",
+        "lib": [
+            "dom",
+            "es2015"
+        ],
+        "baseUrl": ".",
+        "paths": {
+            "preact-material-design": ["../"]
+        }
+    }
+}

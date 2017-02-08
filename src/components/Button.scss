@@ -1,0 +1,110 @@
+@import '../core/variables';
+@import '../core/motion';
+@import '../core/elevation';
+
+$pmd-color-primary: #2196F3; // TODO
+
+$pmd-button-touch-height: 48px !default;
+$pmd-button-height: 36px !default;
+$pmd-button-side-padding: 16px !default;
+
+$pmd-button-height--dense: 32px !default;
+
+$pmd-button-min-width--flat: 64px !default;
+
+.pmd-button {
+    display: inline-block;
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    padding: (($pmd-button-touch-height - $pmd-button-height) / 2);
+    color: white; // TODO
+
+    &__inner {
+        height: $pmd-button-height;
+        line-height: $pmd-button-height;
+        padding: 0 16px;
+        border-radius: 2px;
+
+        font-family: $pmd-font-family;
+        font-size: 14px;
+        font-weight: 500;
+        text-transform: uppercase;
+
+        background: $pmd-color-primary; // TODO
+    }
+
+    &--dense {
+        // Remove touch safe area on dense, desktop only buttons
+        padding: 0 4px;
+
+        .pmd-button__inner {
+            height: $pmd-button-height--dense;
+            line-height: $pmd-button-height--dense;
+            font-size: 13px;
+        }
+    }
+
+    &--flat {
+        padding-left: $pmd-button-side-padding / 2;
+        padding-right: $pmd-button-side-padding / 2;
+        color: $pmd-color-primary; // TODO
+
+        .pmd-button__inner {
+            background: transparent; // TODO
+            transition: 280ms background $pmd-motion--ease-in-out;
+
+            height: $pmd-button-height--dense;
+            line-height: $pmd-button-height--dense;
+            padding: 0 ($pmd-button-side-padding / 2);
+            min-width: $pmd-button-min-width--flat;
+        }
+
+        &:active {
+            .pmd-button__inner {
+                background: rgba(153, 153, 153, 0.40);
+            }
+        }
+
+        &.pmd-button--disabled {
+            pointer-events: none;
+
+            color: rgba(0, 0, 0, .26);
+        }
+    }
+
+    &:focus {
+        outline: 0;
+    }
+
+    &:not(.pmd-button--flat) {
+
+        &.pmd-button--disabled {
+            pointer-events: none;
+            color: rgba(0, 0, 0, .26);
+
+            .pmd-button__inner {
+                background: rgba(0, 0, 0, .12);
+            }
+        }
+
+        .pmd-button__inner {
+            transition: pmd-elevation-transition-property-value(),
+                280ms background $pmd-motion--ease-in-out;
+        }
+
+        &:hover {
+            .pmd-button__inner {
+                @include pmd-elevation(2);
+            }
+        }
+
+        &:active {
+            .pmd-button__inner {
+                @include pmd-elevation(8);
+                background: darken($pmd-color-primary, 6%);
+            }
+        }
+    }
+}
