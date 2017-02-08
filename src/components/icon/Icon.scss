@@ -1,0 +1,53 @@
+$pmd-icon-size: 24px;
+$pmd-icon-padding: 12px;
+
+$pmd-icon-sizes: (
+    normal: (clearance: 12px, size: 24px),
+    dense: (clearance: 10px, size: 20px),
+);
+
+@mixin pmd-icon-size($size) {
+    @if map-has-key($pmd-icon-sizes, $size) {
+        $sizing: map-get($pmd-icon-sizes, $size);
+        &.pmd-icon--size-#{$size} {
+            &:not(.pmd-icon--no-clearance) {
+                padding: map-get($sizing, 'clearance');
+            }
+
+            font-size: map-get($sizing, 'size');
+        }
+    }
+
+    @else {
+        @warn "Invalid icon size `#{$size}`.";
+    }
+}
+
+.pmd-icon {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+
+    color: rgba(0, 0, 0, .54); // TODO
+
+    @include pmd-icon-size('normal');
+    @include pmd-icon-size('dense');
+}
