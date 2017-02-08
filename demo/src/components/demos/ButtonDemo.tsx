@@ -3,6 +3,7 @@ import { Button } from 'preact-material-design';
 
 export function ButtonDemo() {
     return <div>
+        <h2>Buttons</h2>
         <div>
             <h3>Primary</h3>
             <Button>Primary Button</Button>

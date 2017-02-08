@@ -1,0 +1,23 @@
+@import '../../core/variables';
+@import '../../core/motion';
+@import '../../core/elevation';
+
+$pmd-toolbar-height--app: 64px !default;
+$pmd-toolbar-side-padding: 24px !default;
+
+.pmd-toolbar {
+    &--app {
+        @include pmd-elevation(4);
+
+        background: $pmd-color-primary; // TODO
+        color: white; // TODO
+        height: $pmd-toolbar-height--app;
+        line-height: $pmd-toolbar-height--app;
+
+        padding: 0 $pmd-toolbar-side-padding;
+
+        font-family: $pmd-font-family;
+        font-size: 20px;
+        font-weight: 500;
+    }
+}

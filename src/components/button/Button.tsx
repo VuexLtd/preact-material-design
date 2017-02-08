@@ -12,12 +12,13 @@ export class Button extends Component<ButtonProps, {}> {
         type: 'button',
         dense: false,
         flat: false,
+        disabled: false,
     };
 
     public render() {
         const {
-            type,
             children,
+            type,
             dense,
             flat,
             disabled,

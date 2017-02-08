@@ -1,8 +1,6 @@
-@import '../core/variables';
-@import '../core/motion';
-@import '../core/elevation';
-
-$pmd-color-primary: #2196F3; // TODO
+@import '../../core/variables';
+@import '../../core/motion';
+@import '../../core/elevation';
 
 $pmd-button-touch-height: 48px !default;
 $pmd-button-height: 36px !default;
