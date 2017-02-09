@@ -1,0 +1,27 @@
+@import '../core/variables';
+
+$pmd-type-weights: (
+    light: 300,
+    regular: 400,
+    medium: 500,
+);
+
+
+@mixin pmd-type($name, $size, $weight) {
+    .pmd-type--#{$name} {
+        font-family: $pmd-font-family;
+        font-weight: map-get($pmd-type-weights, $weight);
+        font-size: $size;
+    }
+}
+
+@include pmd-type('display-4', 112px, 'light');
+@include pmd-type('display-3', 56px, 'regular');
+@include pmd-type('display-2', 45px, 'regular');
+@include pmd-type('display-1', 34px, 'regular');
+@include pmd-type('headline', 24px, 'regular');
+@include pmd-type('title', 20px, 'medium');
+@include pmd-type('subheading', 15px, 'regular');
+@include pmd-type('body-2', 13px, 'medium');
+@include pmd-type('body-1', 13px, 'regular');
+@include pmd-type('caption', 12px, 'regular');

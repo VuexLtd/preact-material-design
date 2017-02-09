@@ -5,6 +5,7 @@ import { ButtonDemo } from './demos/ButtonDemo';
 import { IconDemo } from './demos/IconDemo';
 import { TextFieldDemo } from './demos/TextFieldDemo';
 import { ToolbarDemo } from './demos/ToolbarDemo';
+import { TypographyDemo } from './demos/TypographyDemo';
 
 export class App extends Component<{}, {}> {
     public render() {
@@ -17,6 +18,7 @@ export class App extends Component<{}, {}> {
                     <IconDemo />
                     <TextFieldDemo />
                     <ToolbarDemo />
+                    <TypographyDemo />
                 </section>
             </div>
         )
