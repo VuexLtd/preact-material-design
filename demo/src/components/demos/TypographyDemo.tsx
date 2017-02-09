@@ -3,7 +3,7 @@ import { Icon } from 'preact-material-design';
 
 export function TypographyDemo() {
     return <div>
-        <h2>Typography</h2>
+        <h2 class="pmd-type--display-1">Typography</h2>
         <div>
             <div class="pmd-type--display-4">Display 4</div>
             <div class="pmd-type--display-3">Display 3</div>
