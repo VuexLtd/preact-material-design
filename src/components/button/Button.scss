@@ -61,7 +61,7 @@ $pmd-button-min-width--flat: 64px !default;
 
         &:active {
             .pmd-button__inner {
-                background: rgba(153, 153, 153, 0.40);
+                // background: rgba(153, 153, 153, 0.40);
             }
         }
 
@@ -101,7 +101,7 @@ $pmd-button-min-width--flat: 64px !default;
         &:active {
             .pmd-button__inner {
                 @include pmd-elevation(8);
-                background: darken($pmd-color-primary, 6%);
+                // background: darken($pmd-color-primary, 6%);
             }
         }
     }

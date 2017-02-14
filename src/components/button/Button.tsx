@@ -1,5 +1,7 @@
 import { h, Component } from 'preact';
 
+import { Ripple } from '../ripple/Ripple';
+
 export interface ButtonProps {
     type?: 'button' | 'submit';
     dense?: boolean;
@@ -42,6 +44,7 @@ export class Button extends Component<ButtonProps, {}> {
             <button class={btnClasses.join(' ')} type={type}>
                 <div class="pmd-button__inner">
                     {children}
+                    <Ripple />
                 </div>
             </button>
         )
