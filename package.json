@@ -8,7 +8,10 @@
   "author": "James Birtles <james.birtles@vuex.io>",
   "license": "MIT",
   "scripts": {
-    "build": "tsc",
+    "prepublish": "npm run build",
+    "build": "npm run build:ts && npm run build:scss",
+    "build:ts": "tsc",
+    "build:scss": "node-sass src/styles.scss dist/styles.css",
     "watch": "tsc -w",
     "start": "cd demo && webpack-dev-server"
   },
