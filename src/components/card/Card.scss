@@ -1,0 +1,75 @@
+@import '../../core/elevation';
+@import '../../core/variables';
+
+@import './CardHeader.scss';
+
+.pmd-card {
+    @include pmd-elevation(2);
+
+    background: white;
+    border-radius: 2px;
+    overflow: hidden;
+
+    width: 400px;
+
+    &--includes-padding + &--includes-padding {
+        padding-top: 0;
+    }
+
+    &-media > * {
+        width: 100%;
+    }
+
+    &-text {
+        font-size: 14px;
+        font-family: $pmd-font-family;
+        line-height: 24px;
+        padding: 16px;
+        margin: 0;
+    }
+
+    &-title {
+        font-size: 24px;
+        font-weight: normal;
+        font-family: $pmd-font-family;
+        padding: 16px;
+        padding-top: 24px;
+        margin: 0;
+
+        + .pmd-card-subtitle {
+            margin-top: -14px;
+            padding-top: 0;
+        }
+    }
+
+    &-subtitle {
+        font-size: 14px;
+        font-weight: normal;
+        font-family: $pmd-font-family;
+        color: rgba(0, 0, 0, .57);
+        padding: 16px;
+        margin: 0;
+    }
+
+    &-actions {
+        display: flex;
+
+        &--vertical {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+
+    &-media-area {
+        display: flex;
+
+        &__content {
+            flex: 1 1 auto;
+        }
+
+        &__media {
+            margin-top: 16px;
+            margin-right: 16px;
+        }
+    }
+}

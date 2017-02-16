@@ -2,6 +2,7 @@ import { h, Component } from 'preact';
 import { Toolbar } from 'preact-material-design';
 
 import { ButtonDemo } from './demos/ButtonDemo';
+import { CardDemo } from './demos/CardDemo';
 import { IconDemo } from './demos/IconDemo';
 import { RippleDemo } from './demos/RippleDemo';
 import { TextFieldDemo } from './demos/TextFieldDemo';
@@ -16,6 +17,7 @@ export class App extends Component<{}, {}> {
                 <section>
                     <p>A set of components for Preact that conform to the material design guidlines.</p>
                     <ButtonDemo />
+                    <CardDemo />
                     <IconDemo />
                     <RippleDemo />
                     <TextFieldDemo />
