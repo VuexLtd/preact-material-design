@@ -1,0 +1,35 @@
+@import '../../core/variables';
+
+$pmd-chip-background: rgba(0, 0, 0, .08) !default;
+$pmd-chip-height: 32px !default;
+
+.pmd-chip {
+    background: $pmd-chip-background;
+
+    font-size: 13px;
+    font-family: $pmd-font-family;
+    color: rgba(0, 0, 0, .87);
+
+    display: inline-flex;
+    align-items: center;
+    height: $pmd-chip-height;
+    border-radius: $pmd-chip-height;
+
+    img {
+        border-radius: 50%;
+        width: $pmd-chip-height;
+        height: $pmd-chip-height;
+
+        + .pmd-chip__text {
+            padding-left: 8px;
+        }
+    }
+
+    &__text {
+        padding: 0 12px;
+    }
+
+    + .pmd-chip {
+        margin-left: 8px;
+    }
+}
