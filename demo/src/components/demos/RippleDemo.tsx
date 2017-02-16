@@ -8,7 +8,7 @@ export function RippleDemo() {
             <Ripple />
         </div>
         <div style={{width: 100, height: 200, background: '#cc00ff'}}>
-            <Ripple />
+            <Ripple colour="rgba(255, 255, 255, .3)" />
         </div>
         <div style={{width: 200, height: 200, background: '#ccff00'}}>
             <Ripple />

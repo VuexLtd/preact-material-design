@@ -36,11 +36,6 @@ module.exports = {
                 test: /\.scss$/,
                 include: [paths.src],
                 use: ['style-loader', 'css-loader', 'sass-loader'],
-            },
-            {
-                test: /\.svg$/,
-                include: [paths.src],
-                use: ['preact-svg-loader'],
             }
         ],
     },
