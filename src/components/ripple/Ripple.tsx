@@ -3,100 +3,137 @@ import { h, Component } from 'preact';
 import { Coord2d } from '../../core/types';
 
 export interface RippleProps {
+    colour?: string;
+    color?: string;
 }
 
-export interface RippleState {
-    position?: Coord2d;
-    scale?: number;
-    active?: boolean;
-    opacity?: number;
-}
-
-export class Ripple extends Component<RippleProps, RippleState> {
-    static defaultProps: Partial<RippleProps> = {
+export class Ripple extends Component<RippleProps, {}> {
+    static defaultProps: RippleProps = {
+        colour: 'rgba(0, 0, 0, .1)',
     };
 
-    public state: RippleState = {
-        position: {
-            x: 0,
-            y: 0,
-        },
-        scale: 0,
-        active: false,
-        opacity: 0,
+    constructor(props?: RippleProps) {
+        super(props);
+
+        this.onMouseDown = this.onMouseDown.bind(this);
+        this.onMouseUp = this.onMouseUp.bind(this);
+    }
+
+    public render() {
+        return <div class="pmd-ripple-container"></div>;
+    }
+
+    public shouldComponentUpdate() {
+        return false;
     }
 
     public componentDidMount(): void {
         const parent = this.base.parentElement;
-
         parent.style.overflow = 'hidden';
-        if (!parent.style.position) {
-            parent.style.position = 'relative';
-        }
+        parent.style.position = 'relative';
 
-        parent.addEventListener('click', evt => {
-            this.setState({
-                position: {
-                    x: evt.layerX,
-                    y: evt.layerY,
-                },
-                opacity: 1,
-                scale: 0,
-                active: false,
-            });
-            const { width, height } = parent.getBoundingClientRect();
-            const scaleX = Math.max(evt.layerX * 2, (width - evt.layerX) * 2);
-            const scaleY = Math.max(evt.layerY * 2, (height - evt.layerY) * 2);
-            const scale = Math.max(scaleX, scaleY);
-            requestAnimationFrame(() => {
-                this.setState({ active: true, scale: scale * 1.5 });
-            })
-        });
-        this.base.addEventListener('transitionend', () => {
-            if (this.state.opacity === 0) {
-                this.setState({
-                    position: {
-                        x: 0,
-                        y: 0,
-                    },
-                    scale: 0,
-                    opacity: 1,
-                    active: false,
-                });
-            }
-
-            if (this.state.scale !== 0) {
-                this.setState({ opacity: 0 });
-            }
-        });
+        parent.addEventListener('mousedown', this.onMouseDown);
+        document.addEventListener('mouseup', this.onMouseUp);
     }
 
-    public render() {
-        const {
-            position,
-            scale,
-            active,
-            opacity,
-        } = this.state;
+    public componentWillUnmount(): void {
+        const parent = this.base.parentElement;
 
-        const classes = [
-            'pmd-ripple',
-        ];
+        parent.removeEventListener('mousedown', this.onMouseDown);
+        document.removeEventListener('mouseup', this.onMouseUp);
+    }
 
-        const styles = {
+    private activeRipple: RippleRef;
+    private onMouseDown(evt: MouseEvent) {
+        this.activeRipple = this.add(Coord2d.fromMouseEvent(evt), this.props.color || this.props.colour);
+        this.activeRipple.trigger(true);
+    }
+
+    private onMouseUp() {
+        if (this.activeRipple) {
+            this.activeRipple.unlock();
+        }
+    }
+
+    public add(pos: Coord2d, colour: string): RippleRef {
+        const ripple = new RippleRef(pos, colour);
+        ripple.attach(this.base);
+        return ripple;
+    }
+}
+
+export class RippleRef {
+    public element = document.createElement('div');
+    public parent: HTMLElement;
+    public locked: boolean = false;
+    public done: boolean = false;
+
+    constructor(
+        public position: Coord2d,
+        public colour: string,
+    ) {
+        this.element.classList.add('pmd-ripple');
+        this.setStyles({
             position: 'absolute',
-            top: 0,
-            left: 0,
-            width: 1,
-            height: 1,
-            background: 'rgba(0, 0, 0, .1)',
-            borderRadius: '50%',
-            transform: `translate(${position.x}px, ${position.y}px) scale(${scale})`,
-            transition: active ? '0.3s transform ease-in, 0.2s opacity ease-out' : '',
-            opacity,
-            willChange: 'transform',
+            top: `${position.y}px`,
+            left: `${position.x}px`,
+            width: '1px',
+            height: '1px',
+            background: colour,
+            transform: 'translate(-50%, -50%) scale(0)',
+            'border-radius': '50%',
+            'pointer-events': 'none',
+            transition: '0.55s all cubic-bezier(0.0, 0.0, 0.2, 1)',
+        });
+
+        this.element.addEventListener('transitionend', () => {
+            if (this.done) {
+                this.remove();
+                return;
+            }
+
+            this.done = true;
+            if (!this.locked) {
+                this.out();
+            }
+        })
+    }
+
+    public attach(container: HTMLElement, parent: HTMLElement = container.parentElement) {
+        container.appendChild(this.element);
+        this.parent = parent;
+    }
+
+    public trigger(lock: boolean = false) {
+        this.locked = lock;
+        const size = this.distanceToCorner(this.parent.getBoundingClientRect()) * 2
+        this.setStyles({ transform: `translate(-50%, -50%) scale(${size})` }, true);
+    }
+
+    public unlock() {
+        this.out();
+    }
+
+    public remove() {
+        this.element.parentElement.removeChild(this.element);
+    }
+
+    private out() {
+        this.setStyles({ opacity: 0 }, true);
+    }
+
+    private distanceToCorner(rect: ClientRect) {
+        const distX = Math.max(this.position.x, rect.width - this.position.x);
+        const distY = Math.max(this.position.y, rect.height - this.position.y);
+        return Math.sqrt(distX * distX + distY * distY);
+    }
+
+    private setStyles(styles: { [index: string]: any }, defer: boolean = false) {
+        if (defer) {
+            requestAnimationFrame(() => this.setStyles(styles, false));
+            return;
         }
 
-        return <div style={styles} class={classes.join(' ')}></div>;
+        Object.assign(this.element.style, styles);
     }
 }
