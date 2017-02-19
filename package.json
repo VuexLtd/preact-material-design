@@ -1,6 +1,6 @@
 {
   "name": "preact-material-design",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A set of material components for Preact.",
   "main": "dist/index.js",
   "typings": "dist/index",
