@@ -53,8 +53,6 @@ $pmd-button-min-width--flat: 64px !default;
             background: transparent; // TODO
             transition: 280ms background $pmd-motion--ease-in-out;
 
-            height: $pmd-button-height--dense;
-            line-height: $pmd-button-height--dense;
             padding: 0 ($pmd-button-side-padding / 2);
             min-width: $pmd-button-min-width--flat;
         }

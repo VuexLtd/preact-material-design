@@ -12,6 +12,8 @@ export class Ripple extends Component<RippleProps, {}> {
         colour: 'rgba(0, 0, 0, .1)',
     };
 
+    private ripples = new Set<RippleRef>();
+
     constructor(props?: RippleProps) {
         super(props);
 
@@ -29,8 +31,8 @@ export class Ripple extends Component<RippleProps, {}> {
 
     public componentDidMount(): void {
         const parent = this.base.parentElement;
-        parent.style.overflow = 'hidden';
         parent.style.position = 'relative';
+        parent.style.overflow = 'hidden';
 
         parent.addEventListener('mousedown', this.onMouseDown);
         document.addEventListener('mouseup', this.onMouseUp);
@@ -38,15 +40,22 @@ export class Ripple extends Component<RippleProps, {}> {
 
     public componentWillUnmount(): void {
         const parent = this.base.parentElement;
+        parent.style.position = '';
+        parent.style.overflow = '';
 
         parent.removeEventListener('mousedown', this.onMouseDown);
         document.removeEventListener('mouseup', this.onMouseUp);
+
+        this.ripples.forEach(ripple => ripple.remove());
     }
 
     private activeRipple: RippleRef;
     private onMouseDown(evt: MouseEvent) {
         this.activeRipple = this.add(Coord2d.fromMouseEvent(evt), this.props.color || this.props.colour);
         this.activeRipple.trigger(true);
+
+        this.ripples.add(this.activeRipple);
+        this.activeRipple.onDestroy = ripple => this.ripples.delete(ripple);
     }
 
     private onMouseUp() {
@@ -67,6 +76,7 @@ export class RippleRef {
     public parent: HTMLElement;
     public locked: boolean = false;
     public done: boolean = false;
+    public onDestroy: (ripple: RippleRef) => void = () => undefined;
 
     constructor(
         public position: Coord2d,
@@ -116,6 +126,7 @@ export class RippleRef {
 
     public remove() {
         this.element.parentElement.removeChild(this.element);
+        this.onDestroy(this);
     }
 
     private out() {

@@ -18,6 +18,7 @@ module.exports = {
         hot: true,
         contentBase: paths.src,
         publicPath: '/',
+        port: 4546,
     },
     resolve: {
         extensions: ['.js', '.json', '.ts', '.tsx'],

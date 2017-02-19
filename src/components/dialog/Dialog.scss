@@ -1,0 +1,75 @@
+@import '../../core/variables';
+
+.pmd-dialog-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(0, 0, 0, .2);
+    animation: 300ms fadeIn forwards $pmd-motion--ease-out;
+}
+
+.pmd-dialog {
+    @include pmd-elevation(24);
+
+    border-radius: 2px;
+    background: white;
+
+    max-height: calc(100vh - 48px);
+    max-width: calc(100vw - 48px);
+
+    @media (max-width: 600px) {
+        max-height: 100vh;
+        max-width: 100vw;
+    }
+
+    &--includes-padding + &--includes-padding {
+        padding-top: 0;
+    }
+
+    &-title {
+        font-size: 24px;
+        font-weight: normal;
+        font-family: $pmd-font-family;
+        padding: 24px;
+        padding-bottom: 20px;
+    }
+
+    &-content {
+        font-size: 14px;
+        font-family: $pmd-font-family;
+        line-height: 24px;
+        padding: 24px;
+    }
+
+    &-actions {
+        display: flex;
+        justify-content: flex-end;
+        padding-left: 24px;
+
+        .pmd-button + .pmd-button {
+            padding-left: 0;
+        }
+
+        &--vertical {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

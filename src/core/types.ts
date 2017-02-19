@@ -5,7 +5,7 @@ export class Coord2d {
         return new Coord2d(x, y);
     }
 
-    public static fromMouseEvent(evt: MouseEvent, strategy: MousePositionStrategy = 'layer') {
+    public static fromMouseEvent(evt: MouseEvent, strategy: MousePositionStrategy = 'offset') {
         return new Coord2d(evt[`${strategy}X`], evt[`${strategy}Y`]);
     }
 

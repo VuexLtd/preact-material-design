@@ -2250,6 +2250,10 @@ postcss@^5.0.10, postcss@^5.0.11, postcss@^5.0.12, postcss@^5.0.13, postcss@^5.0
     source-map "^0.5.6"
     supports-color "^3.2.3"
 
+preact-portal@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/preact-portal/-/preact-portal-1.1.1.tgz#8966382f5726627d666dee6133442a538060760a"
+
 preact@^7.2.0:
   version "7.2.0"
   resolved "https://registry.yarnpkg.com/preact/-/preact-7.2.0.tgz#8aacc97465a65509bc556604a7750d48e2fa7ad1"

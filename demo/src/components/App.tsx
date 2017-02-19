@@ -4,6 +4,7 @@ import { Toolbar } from 'preact-material-design';
 import { ButtonDemo } from './demos/ButtonDemo';
 import { CardDemo } from './demos/CardDemo';
 import { ChipDemo } from './demos/ChipDemo';
+import { DialogDemo } from './demos/DialogDemo';
 import { IconDemo } from './demos/IconDemo';
 import { RippleDemo } from './demos/RippleDemo';
 import { TextFieldDemo } from './demos/TextFieldDemo';
@@ -20,6 +21,7 @@ export class App extends Component<{}, {}> {
                     <ButtonDemo />
                     <CardDemo />
                     <ChipDemo />
+                    <DialogDemo />
                     <IconDemo />
                     <RippleDemo />
                     <TextFieldDemo />
