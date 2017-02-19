@@ -4,7 +4,9 @@ export interface TextFieldProps {
     type?: 'text' | 'password' | 'email' | 'number';
     label?: string;
     disabled?: boolean;
+
     value?: string;
+    name?: string;
     onInput?(evt: Event): void;
 }
 
@@ -85,6 +87,7 @@ export class TextField extends Component<TextFieldProps, TextFieldState> {
                     class="pmd-textfield__input"
                     type={type}
                     value={value}
+                    name={this.props.name}
                     onInput={this.onInput}
                     onFocus={this.onFocus}
                     onBlur={this.onBlur}

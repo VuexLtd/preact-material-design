@@ -7,6 +7,8 @@ export interface ButtonProps {
     dense?: boolean;
     flat?: boolean;
     disabled?: boolean;
+
+    onClick?: JSX.MouseEventHandler;
 }
 
 export class Button extends Component<ButtonProps, {}> {
@@ -24,6 +26,8 @@ export class Button extends Component<ButtonProps, {}> {
             dense,
             flat,
             disabled,
+
+            onClick,
         } = this.props;
 
         const btnClasses = ['pmd-button'];
@@ -41,7 +45,10 @@ export class Button extends Component<ButtonProps, {}> {
         }
 
         return (
-            <button class={btnClasses.join(' ')} type={type}>
+            <button
+                class={btnClasses.join(' ')}
+                type={type}
+                onClick={onClick}>
                 <div class="pmd-button__inner">
                     {children}
                     <Ripple />
