@@ -1,5 +1,5 @@
 import { h, Component } from 'preact';
-import { Toolbar } from 'preact-material-design';
+import { Toolbar, Content } from 'preact-material-design';
 
 import { ButtonDemo } from './demos/ButtonDemo';
 import { CardDemo } from './demos/CardDemo';
@@ -16,7 +16,7 @@ export class App extends Component<{}, {}> {
         return (
             <div>
                 <Toolbar>Preact Material Design</Toolbar>
-                <section>
+                <Content>
                     <p>A set of components for Preact that conform to the material design guidlines.</p>
                     <ButtonDemo />
                     <CardDemo />
@@ -27,7 +27,7 @@ export class App extends Component<{}, {}> {
                     <TextFieldDemo />
                     <ToolbarDemo />
                     <TypographyDemo />
-                </section>
+                </Content>
             </div>
         )
     }

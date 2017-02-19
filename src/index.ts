@@ -1,6 +1,7 @@
 export * from './components/button/Button';
 export * from './components/card/Card';
 export * from './components/chip/Chip';
+export * from './components/content/Content';
 export * from './components/dialog/Dialog';
 export * from './components/icon/Icon';
 export * from './components/ripple/Ripple';
