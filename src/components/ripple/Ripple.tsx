@@ -51,7 +51,8 @@ export class Ripple extends Component<RippleProps, {}> {
 
     private activeRipple: RippleRef;
     private onMouseDown(evt: MouseEvent) {
-        this.activeRipple = this.add(Coord2d.fromMouseEvent(evt), this.props.color || this.props.colour);
+        const parent = this.base.parentElement;
+        this.activeRipple = this.add(Coord2d.fromMouseEvent(evt, 'offset', parent), this.props.color || this.props.colour);
         this.activeRipple.trigger(true);
 
         this.ripples.add(this.activeRipple);
